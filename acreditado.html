@@ -1,0 +1,139 @@
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+
+    <title>ACREDITACIÓN</title>
+
+ <script src="jquery/jquery.js" type="text/javascript"></script>
+	<script src="bootstrap/js/jquery.js" type="text/javascript"></script>
+	<script src="dataTable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="dataTable/media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+ <link href="dataTable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+ <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="dataTable/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+	<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="bootstrap/css/style.css" rel="stylesheet" type="text/css">
+	
+	
+</head>
+<body>
+<div class="container">
+			<div>
+				<div style="float: left;"><h2>Acreditados</h2></div>
+				<div style="float: right;"><button id="btnAdd" class="btn btn-primary">Nuevo</button></div>
+	        </div>
+	        <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            	<th>Foto</th>
+                <th>Nombre y Apellido</th>
+                <th>Nro. Identificación</th>
+                <th>Cargo</th>
+                <th>Tipo de Acreditación</th>
+                <th>Institución</th>
+                <th>País</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+                
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre y Apellido</th>
+                <th>Nro. Identificación</th>
+                <th>Cargo</th>
+                <th>Tipo de Acreditación</th>
+                <th>Institución</th>
+                <th>País</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                 <td>61</td>
+                <td><button type="button" class="btn btn-primary btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-pencil"></span>
+														</button></td>					
+				<td><button type="button" class="btn btn-danger btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-trash"></span>
+														</button></td>	
+                
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>Tokyo</td>
+                 <td>61</td>
+                <td>63</td>
+               <td><button type="button" class="btn btn-primary btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-pencil"></span>
+														</button></td>					
+				<td><button type="button" class="btn btn-danger btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-trash"></span>
+														</button></td>										
+            </tr>
+            <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>San Francisco</td>
+                <td>66</td>
+                <td>61</td>
+				<td><button type="button" class="btn btn-primary btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-pencil"></span>
+														</button></td>					
+				<td><button type="button" class="btn btn-danger btn-xs"	onclick="editar(#{evento.id})" id="edit#{evento.id}"
+															data-id="#{evento.id}">
+															<span class="glyphicon glyphicon-trash"></span>
+														</button></td>									
+            </tr>
+
+        </tbody>
+    </table>
+		</div>
+</body>
+<script>
+		$(document).ready(function() {
+		    $('#example').DataTable({
+		    	"language": {
+		            "lengthMenu": "Mostrar _MENU_ filas por página",
+		            "zeroRecords": "No hay registros",
+		            "info": "Mostrando página _PAGE_ de _PAGES_",
+		            "infoEmpty": "Sin registros",
+		            "search":"Buscar",
+		            "infoFiltered": "(filtrado de _MAX_ registros totales)"
+		        }
+		    });
+
+		    $("#btnAdd").click(function(){
+				var id = $(this).attr('data-id');
+		        //alert("id: "+id);
+				//$('#userForm').reset();
+				document.getElementById("eventoForm").reset();
+		        $('#btnRegister').show();
+		        $('#btnSave').hide();
+		        
+
+		    	$('#edit').modal('show');
+			});
+		
+		} );
+		</script>
+</html>

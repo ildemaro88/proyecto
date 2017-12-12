@@ -1,0 +1,21 @@
+body{
+  /* background-color: #FFFFCC;*/
+
+      }
+      .navbar-inverse{
+              background-color: #337ab7;
+    border-color: #2e6da4;
+      }
+      .navbar-inverse .navbar-nav>li>a{
+          color:#ffffff;
+      }
+div.loading, .loading {
+   /*background-color: #FFFFFF;*/
+   background-image: url('../imagenes/loading7.gif');
+   background-position: center center;
+   background-repeat: no-repeat;
+   z-index: 1400;
+}
+div.loading * {
+   visibility: hidden;
+}
