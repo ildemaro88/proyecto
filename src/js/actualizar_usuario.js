@@ -83,10 +83,10 @@ $(document).ready(function() {
                   $('.help-block').remove();
                     $("#msg").css({'color':'green'})                   
                     $("#msg").html(result);
-                    setTimeout(function() {
+                    //setTimeout(function() {
                         //$modalDiv.modal('hide').removeClass('loading');
                         //alert("Operacion Exitosa");
-                    }, 1000)
+                    //}, 1000)
                     //location.reload();
                  },
        error: function(data) {

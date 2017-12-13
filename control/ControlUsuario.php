@@ -27,16 +27,22 @@ if(!empty($usuariojson)){
     $usuariophp = json_decode($usuariojson,true);
     
     $UsuarioActualizar = new Usuario($usuariophp['nombre']," ",$usuariophp['idTrabajador'],$usuariophp['rol'],$usuariophp['correo'],$usuariophp['estatus'],$usuariophp['id'],$usuariophp['actualiza']);
-    return $UsuarioActualizar->guardar();  
+    
+        return $UsuarioActualizar->actualizarUsuario();  
+
+   
+    
 
 }
 
 if(!empty($usuarioClavejson)){
+
+    //var_dump($usuarioClavejson); exit();
      
     $usuariophp = json_decode($usuarioClavejson,true);
     
-    $UsuarioActualizar = new Usuario($usuariophp['nombre']," ",$usuariophp['idTrabajador'],$usuariophp['rol'],$usuariophp['correo'],$usuariophp['estatus'],$usuariophp['id']);
-    return $UsuarioActualizar->actualizarUsuario();  
+    $UsuarioActualizar = new Usuario($usuariophp['nombre'],$usuariophp['clave'],$usuariophp['idTrabajador'],$usuariophp['rol'],$usuariophp['correo'],$usuariophp['estatus'],$usuariophp['id']);
+    return $UsuarioActualizar->guardar();  
 
 }
 

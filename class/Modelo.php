@@ -13,6 +13,9 @@ Session_start();
  */
 require_once "/../config/config.php";
 
+// Incluimos la clase swift
+require '/../swiftmailer/lib/swift_required.php';
+
 abstract class Modelo {
     
     protected $_db; 

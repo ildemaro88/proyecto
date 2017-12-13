@@ -33,7 +33,7 @@ $prestamos = $prestamos->getAll();
                 <th>Telefono</th> 
                 <th>Herramienta</th>                 
                 <th>Cantidad</th>
-                <th>Fecha Prestamo</th>
+                <th>Fecha Asignado</th>
                 <th>Fecha Devuelto</th>
                 <th>Estatus</th>
                 <th>Editar</th>
@@ -47,7 +47,7 @@ $prestamos = $prestamos->getAll();
                 <th>Telefono</th> 
                 <th>Herramienta</th>                 
                 <th>Cantidad</th>
-                <th>Fecha Prestamo</th>
+                <th>Fecha Asignado</th>
                 <th>Fecha Devuelto</th>
                 <th>Estatus</th>
                 <th>Editar</th>

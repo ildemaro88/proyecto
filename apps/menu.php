@@ -15,13 +15,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
- <?php if(!empty($_GET['backup'])){
-      //echo PATH_BACKUP.DB_NAME. "_" . date("d-m-Y_H-i-s") . ".sql";?>
-                <div >
-                 <em id="msg" style="color: green ; background-color: #FFFFFF"> <b>Se ha realizado el respaldo exitosamente en : <?php echo PATH_BACKUP.DB_NAME. "_" . date("d-m-Y_H-i-s") . ".sql";?> </b></em>
-                </div>
-                <?php
-                unset($_GET['backup']);}?>
+
 <html>
     <head>
         <title>Sistema de Gesti&oacute;n e Inventario</title>
@@ -40,7 +34,7 @@ and open the template in the editor.
    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-              <a class="" href="#"><img height="40px" src="../src/imagenes/iutoms"/></a>
+              <a class="" href="#"><img height="40px" src="../src/imagenes/iutoms.jpg"/></a>
           </div>
           <?php if($rolUsuarioLogueado ==1){?>
             <ul class="nav navbar-nav " >
@@ -83,4 +77,16 @@ and open the template in the editor.
     </ul>
         </div>
     </nav>
-   
+    <?php if(isset($_SESSION['backup']) && $_SESSION['backup'] == "true"){
+      //echo PATH_BACKUP.DB_NAME. "_" . date("d-m-Y_H-i-s") . ".sql";?>
+                <div >
+              
+                <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Excelente!</strong> Se ha realizado el respaldo exitosamente en : <?php echo PATH_BACKUP.DB_NAME. "_" . date("d-m-Y_H-i-s") . ".sql";?>.
+</div>
+                 
+                </div>
+                <?php
+                $_SESSION['backup'] = "false";
+                }?>

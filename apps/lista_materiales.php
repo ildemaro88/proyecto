@@ -25,7 +25,9 @@ $materiales = $material->getAll("2");
             <table id="materiales" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-            	<th>Nombre</th>                
+                <th>C&oacute;digo</th>  
+            	<th>Nombre</th>  
+
                 <th>Estatus </th>
                 
                 <th>Editar</th>
@@ -35,6 +37,7 @@ $materiales = $material->getAll("2");
         </thead>
         <tfoot>
             <tr>
+            <th>C&oacute;digo</th> 
                <th>Nombre</th>
                <th>Estatus </th>
                
@@ -48,7 +51,7 @@ $materiales = $material->getAll("2");
      
                 ?>
                 <tr>
-                            
+                    <td><?php echo $material['codigo']; ?></td>        
                     <td><?php echo $material['nombre']; ?></td>
                     <td><?php echo ($material['estatus']==1)? "ACTIVO": "INACTIVO"; ?></td>
                     
@@ -88,6 +91,13 @@ $materiales = $material->getAll("2");
                         <input type="text" placeholder="Nombre o descripci&oacute; del Material" class="form-control" id="nombreMaterial" name="nombreMaterial"/>
                     </div>
                 </div>  
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input type="hidden" name="idMaterial" id="idMaterial"/>
+                        <label for="nombreMaterial" class="control-label">C&oacute;digo del material</label>
+                        <input type="text" placeholder="C&oacute;digo único para este material" class="form-control" id="codigoMaterial" name="codigoMaterial"/>
+                    </div>
+                </div> 
                 <div class="form-group row">
                     <div class="col-md-12">
                         <label for="estatusMaterial" class="control-label">Estatus</label>

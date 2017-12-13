@@ -1,7 +1,7 @@
 <?php
 require_once 'menu.php';
 ?>
-<body background="../src/imagenes/hugo1">
+<body background="../src/imagenes/hugo1.jpg">
     <h1>Inicio</h1>
     
     <?php if(!empty($_GET['backup'])){

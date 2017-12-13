@@ -21,6 +21,7 @@ $herramientas = $herramienta->getAll('1');
             <table id="herramientas" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>C&oacute;digo</th> 
             	<th>Nombre</th>                
                 <th>Estatus</th>
                 <th>Editar</th>
@@ -30,6 +31,7 @@ $herramientas = $herramienta->getAll('1');
         </thead>
         <tfoot>
             <tr>
+                <th>C&oacute;digo</th> 
                <th>Nombre</th>
                 <th>Estatus</th>
                 <th>Editar</th>
@@ -42,7 +44,7 @@ $herramientas = $herramienta->getAll('1');
      
                 ?>
                 <tr>
-                            
+                    <td><?php echo $herramienta['codigo']; ?></td>        
                     <td><?php echo $herramienta['nombre']; ?></td>
                     <td><?php echo ($herramienta['estatus']==1)? "ACTIVO": "INACTIVO"; ?></td>
                     <td><button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $herramienta['id_recurso']; ?>)" id="<?php echo $herramienta['id_recurso']; ?>"
@@ -86,6 +88,13 @@ $herramientas = $herramienta->getAll('1');
                         <input type="text" placeholder="nombre o descripci&oacute;n" class="form-control" id="nombreHerramienta" name="nombreHerramienta"/>
                     </div>
                 </div>  
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input type="hidden" name="idMaterial" id="idMaterial"/>
+                        <label for="codigoHerramienta" class="control-label">C&oacute;digo de la herramienta</label>
+                        <input type="text" placeholder="C&oacute;digo único para esta herramienta" class="form-control" id="codigoHerramienta" name="codigoHerramienta"/>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-md-12">
                         <label for="estatusHerramienta" class="control-label">Estatus</label>

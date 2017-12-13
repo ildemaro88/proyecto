@@ -1,4 +1,5 @@
 <?php 
+Session_start();
 require_once '../config/config.php';
 /*$return_var = NULL;
 $output = NULL;
@@ -18,10 +19,10 @@ passthru("C:\wamp\bin\mysql\mysql5.7.14\bin\mysqldump --opt --host=$dbhost --use
 
 // report - disable with // if not needed
 // must look like "-- Dump completed on ..." 
+$_SESSION['backup'] = "true";
 
-
-echo "<script type='text/javascript' > alert('Se a creado el respaldo de la base de datos en $dumpfile');</script>$dumpfile "; 
-header('location: ../apps/inicio.php?backup=true');
+//echo "<script type='text/javascript' > alert('Se a creado el respaldo de la base de datos en $dumpfile');</script>$dumpfile "; 
+header('location: '.$_SERVER["HTTP_REFERER"].'');
 //passthru("tail -1 $dumpfile");
 
 

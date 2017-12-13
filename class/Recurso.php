@@ -12,14 +12,16 @@ class Recurso extends Modelo{
     public $tabla = "recurso";
     public $id;
     public $nombre;
+    public $codigo;
     public $idTipo;
     
-     public function __construct($nombre = " ",  $estatus = " ",$idTipo=" ", $id = " ") 
+     public function __construct($nombre = " ",  $estatus = " ",$idTipo=" ", $codigo=" ", $id = " ") 
     { 
         $this->id       = $id;
         $this->nombre   = $nombre;
         $this->estatus  = $estatus;
         $this->idTipo   = $idTipo;
+        $this->codigo   = $codigo;
         
     } 
 
@@ -117,10 +119,18 @@ class Recurso extends Modelo{
 
     public function guardar() {  
         if($this->id !=" "){//Modificar
-             $this->query = "UPDATE  ".$this->tabla." SET nombre='".$this->nombre."',estatus='".$this->estatus."' WHERE id_recurso = '".$this->id."'";
+            $this->query= " SELECT * FROM ".$this->tabla." WHERE codigo = '".$this->codigo."' and estatus != 6 "; 
+                $this->get_results_from_query(); 
+
+                if(count($this->rows)==0) { 
+                    $this->query = "UPDATE  ".$this->tabla." SET nombre='".$this->nombre."',codigo='".$this->codigo."',estatus='".$this->estatus."' WHERE id_recurso = '".$this->id."'";
              //var_dump($this->query);
         $msg = $this->execute_single_query(); 
         echo $msg;
+                 }else{
+                    echo "n";
+                 }
+             
 
            
         }else{
@@ -128,14 +138,20 @@ class Recurso extends Modelo{
             $this->get_results_from_query(); 
 
             if(count($this->rows)==0) { 
-                $this->query = "INSERT INTO ".$this->tabla." (id_tipo_recurso,nombre,estatus)
-                VALUES
-                ('".$this->idTipo."','".$this->nombre."','".$this->estatus."')
-                ";     
-                     //var_dump($this->query);
-                $msg = $this->execute_single_query(); 
-                echo $msg;
-                 
+                $this->query= " SELECT * FROM ".$this->tabla." WHERE codigo = '".$this->codigo."' and estatus != 6 "; 
+                $this->get_results_from_query(); 
+
+                if(count($this->rows)==0) { 
+                    $this->query = "INSERT INTO ".$this->tabla." (id_tipo_recurso,nombre,estatus,codigo)
+                    VALUES
+                    ('".$this->idTipo."','".$this->nombre."','".$this->estatus."','".$this->codigo."')
+                    ";     
+                         //var_dump($this->query);
+                    $msg = $this->execute_single_query(); 
+                    echo $msg;
+                 }else{
+                    echo "n";
+                 }
             }else{ 
                 echo "0";
             } 

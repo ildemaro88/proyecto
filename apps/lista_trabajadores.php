@@ -35,7 +35,7 @@ $cargos = $cargos->getAll();
             	<th>Nombre</th> 
                 <th>Apellido</th>                 
                 <th>Cargo</th>
-                <th>Telefono</th>
+                <th>Tel&eacute;fono</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
                 
@@ -47,7 +47,7 @@ $cargos = $cargos->getAll();
                 <th>Nombre</th> 
                 <th>Apellido</th>                
                 <th>Cargo</th>
-                <th>Telefono</th>
+                <th>Tel&eacute;fono</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -138,7 +138,7 @@ $cargos = $cargos->getAll();
                 </div> 
                 <div class="form-group row">
                     <div class="col-md-12">
-                        <label for="telefonoTrabajador" class="control-label">Telefono Del Trabajador</label>
+                        <label for="telefonoTrabajador" class="control-label">Tel&eacute;fono Del Trabajador</label>
                         <input type="text" placeholder="Telefono de Habitacion" class="form-control solo-numero" id="telefonoTrabajador" name="telefonoTrabajador"/>
                     </div> 
                 </div>

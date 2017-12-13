@@ -37,11 +37,13 @@ $(document).ready(function() {
     $( "#formMaterial" ).validate( {
         rules: {
             nombreMaterial: "required",
-            estatusMaterial: "required"            
+            estatusMaterial: "required",
+            codigoMaterial: "required",            
         },
         messages: {
             nombreMaterial: "Este campo es obligatorio",
-            estatusMaterial: "Este campo es obligatorio"            
+            estatusMaterial: "Este campo es obligatorio",
+            codigoMaterial: "Este campo es obligatorio",
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
@@ -80,6 +82,7 @@ $(document).ready(function() {
              id: $('#idMaterial').val(),
              nombre: $('#nombreMaterial').val(),
              estatus: $('#estatusMaterial').val(),
+             codigo: $('#codigoMaterial').val(),
              tipo:"2"            
           };
           var recursojson = JSON.stringify(material);
@@ -88,9 +91,21 @@ $(document).ready(function() {
               url: "../control/ControlRecurso.php", 
               type: "post",
               success: function(result){    
-                  $("#msg").css({'color':'green'})             
+                  if(result != "0" && result != "n"){        
+                  $("#msg").css({'color':'green'})           
                   $("#msg").html(result);
                   location.reload();
+                }
+                else{
+                  if(result == "0"){
+
+                   $("#msg").css({'color':'red'})
+                   $("#msg").html("El material "+ nombre +" ya se encuentra registrado. Verifique el Inventario."); 
+                 }else{
+                    $("#msg").css({'color':'red'})
+                   $("#msg").html("El c&oacute;digo del recurso debe ser &uacute;nico . Verifique el Inventario."); 
+                 }
+                }
                 
                 
                },
@@ -106,20 +121,27 @@ $(document).ready(function() {
      $('#btnRegistrarMaterial').click(function(){
          var nombre = $('#nombreMaterial').val();
          var estatus = $('#estatusMaterial').val();
+         var codigo = $('#codigoMaterial').val();
          if ($( "#formMaterial" ).valid()){
         $.ajax({
-            data: "nombreRecurso="+nombre+"&estatusRecurso="+estatus+"&tipoRecurso=2",
+            data: "nombreRecurso="+nombre+"&estatusRecurso="+estatus+"&tipoRecurso=2&codigoRecurso="+codigo,
             url: "../control/ControlRecurso.php", 
             type: "post",
             success: function(result){
-               if(result != "0"){        
+               if(result != "0" && result != "n"){        
                   $("#msg").css({'color':'green'})           
                   $("#msg").html(result);
                   location.reload();
                 }
                 else{
+                  if(result == "0"){
+
                    $("#msg").css({'color':'red'})
-                   $("#msg").html("El material "+ nombre +" ya se encuentra registrado. Verifique el Inventario.");
+                   $("#msg").html("El material "+ nombre +" ya se encuentra registrado. Verifique el Inventario."); 
+                 }else{
+                    $("#msg").css({'color':'red'})
+                   $("#msg").html("El c&oacute;digo del recurso debe ser &uacute;nico . Verifique el Inventario."); 
+                 }
                 }
             //$("#msg").html(result);
            //location.reload();
@@ -188,6 +210,7 @@ function editar(id){
             $('#btnActualizarMaterial').show();
             $('#btnRegistrarMaterial').hide();
             $('#nombreMaterial').val(result[0].nombre);
+            $('#codigoMaterial').val(result[0].codigo);
             $('#estatusMaterial').val(result[0].estatus);
             $('#idMaterial').val(result[0].id_recurso);
             

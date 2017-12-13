@@ -2,8 +2,10 @@
 
 <?php 
 require_once 'class/Login.php';
+
 extract($_POST);
-if ((count($_SESSION)>0) and ($_SESSION['error']<1)) {
+
+if (isset($_SESSION["usuario"]) and (!isset($_SESSION['error']))) {
     header('location: apps/inicio.php');
    
 }
@@ -47,12 +49,13 @@ if(!empty($usuario)&& !empty($clave)){
                         <input type="password" class="form-control" placeholder="Contraseña" id="clave" name="clave"/>
                     </div> 
                 </div>
-                <?php if(!empty($_SESSION['error'])){?>
+                <?php if(!empty($_SESSION['error']) && $_SESSION['error'] == 1){  ?>
                 <div >
                  <em id="msg" style="color: red;"> Usuario/Contraseña Incorrectos. Intente de nuevo.</em>
                 </div>
-                <?php }?>
+                <?php } //unset($_SESSION['error']); }?>
                 <div class="">
+                    <p><a href="recuperar.php">¿Olvid&oacute; su contraseña?</a></p>
                     <input type="submit" class="form-control btn-primary" value="Ingresar">
                 </div> 
                 

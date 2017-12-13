@@ -1,8 +1,6 @@
 <?php
 
 require_once "Modelo.php";
-// Incluimos la clase swift
-require '../swiftmailer/lib/swift_required.php';
 
 
 /**
@@ -69,7 +67,7 @@ class Usuario extends Modelo{
 
     public function guardar() {  
         
-        if($this->id !=" "){//Modificar
+        if(!empty($this->id)){//Modificar
               $this->query = "UPDATE  ".$this->tabla." SET clave='".$this->clave."' ,correo='".$this->correo."' WHERE id_usuario = '".$this->id."'";
             
           

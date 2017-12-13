@@ -38,11 +38,13 @@ $(document).ready(function() {
     $( "#formHerramienta" ).validate( {
         rules: {
             nombreHerramienta: "required",
-            estatusHerramienta: "required"            
+            estatusHerramienta: "required",
+            codigoHerramienta: "required",            
         },
         messages: {
             nombreHerramienta: "Este campo es obligatorio",
-            estatusHerramienta: "Este campo es obligatorio"            
+            estatusHerramienta: "Este campo es obligatorio",            
+            codigoHerramienta: "Este campo es obligatorio",
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
@@ -82,6 +84,7 @@ $(document).ready(function() {
              id: $('#idHerramienta').val(),
              nombre: $('#nombreHerramienta').val(),
              estatus: $('#estatusHerramienta').val(),
+             codigo: $('#codigoHerramienta').val(),
              tipo:"1"
                        
           };
@@ -91,9 +94,22 @@ $(document).ready(function() {
               url: "../control/ControlRecurso.php", 
               type: "post",
               success: function(result){ 
-                  $("#msg").css({'color':'green'})                
-                  $("#msg").html(result);
-                  location.reload();
+                  if(result != "0" && result != "n"){         
+                    $("#msg").css({'color':'green'})          
+                    $("#msg").html(result);
+                    location.reload();
+                  }
+                  else{
+                      if(result == "0"){
+
+                       $("#msg").css({'color':'red'});
+                       $("#msg").html("La herramienta "+ nombre +" ya se encuentra registrada. Verifique el Inventario.");
+                      }else{
+                        $("#msg").css({'color':'red'});
+                        $("#msg").html("El c&oacute;digo del recurso debe ser &uacute;nico . Verifique el Inventario."); 
+                      }
+                     
+                  }
                 
                 
                },
@@ -109,20 +125,28 @@ $(document).ready(function() {
      $('#btnRegistrarHerramienta').click(function(){
        var nombre = $('#nombreHerramienta').val();
        var estatus = $('#estatusHerramienta').val();
+       var codigo = $('#codigoHerramienta').val();
        if ($( "#formHerramienta" ).valid()){
           $.ajax({
-              data: "nombreRecurso="+nombre+"&estatusRecurso="+estatus+"&tipoRecurso=1",
+              data: "nombreRecurso="+nombre+"&estatusRecurso="+estatus+"&tipoRecurso=1&codigoRecurso="+codigo,
               url: "../control/ControlRecurso.php", 
               type: "post",
               success: function(result){
-                 if(result != "0"){         
+                 if(result != "0" && result != "n"){         
                     $("#msg").css({'color':'green'})          
                     $("#msg").html(result);
                     location.reload();
                   }
                   else{
-                     $("#msg").css({'color':'red'})
-                     $("#msg").html("La herramienta "+ nombre +" ya se encuentra registrada. Verifique el Inventario.");
+                      if(result == "0"){
+
+                       $("#msg").css({'color':'red'});
+                       $("#msg").html("La herramienta "+ nombre +" ya se encuentra registrada. Verifique el Inventario.");
+                      }else{
+                        $("#msg").css({'color':'red'});
+                        $("#msg").html("El c&oacute;digo del recurso debe ser &uacute;nico . Verifique el Inventario."); 
+                      }
+                     
                   }
               //$("#msg").html(result);
              //location.reload();
@@ -187,6 +211,7 @@ function editar(id){
             $('#btnRegistrarHerramienta').hide();
             $('#nombreHerramienta').val(result[0].nombre);
             $('#estatusHerramienta').val(result[0].estatus);
+            $('#codigoHerramienta').val(result[0].codigo);
             $('#idHerramienta').val(result[0].id_recurso);
             
         
