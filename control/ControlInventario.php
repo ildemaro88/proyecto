@@ -11,10 +11,11 @@ if(!empty($recurso) and !empty($totalRecurso)){
     if(!empty($max) and $max < $totalRecurso){
          echo "0";
     }else{
-
-
-	$recibe = (empty($recibe))?" ":$recibe;
-    $RecursoEntrante = new Inventario($recurso,$totalRecurso,$tipoTransaccion,$recibe);
+    
+    $estatus = (empty($estatus))?"4":$estatus;
+	$recibe  = (empty($recibe))?" ":$recibe;
+    
+    $RecursoEntrante = new Inventario($recurso,$totalRecurso,$tipoTransaccion,$recibe," ",$estatus);
     
     return $RecursoEntrante->guardar();
     }

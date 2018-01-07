@@ -54,3 +54,24 @@ if(!empty($idPrestamoE)){
     $PrestamoEliminar = new Prestamo();
     return $PrestamoEliminar->eliminar($idPrestamoE);
 }
+
+//Entregar prestamo:
+if(!empty($idPrestamoA)){
+
+    $PrestamoSalida = new Prestamo();
+    return $PrestamoSalida->entregar($idPrestamoA,$tipo);
+}
+
+//Aprobar solicitud:
+if(!empty($idPrestamoAS)){
+
+    $PrestamoSalida = new Prestamo();
+    return $PrestamoSalida->aprobar($idPrestamoAS,$tipo);
+}
+
+//Aprobar solicitud:
+if(!empty($idPrestamoR)){
+
+    $PrestamoSalida = new Prestamo();
+    return $PrestamoSalida->rechazar($idPrestamoR,$tipo);
+}

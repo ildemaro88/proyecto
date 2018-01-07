@@ -22,7 +22,7 @@ $(document).ready(function() {
      $('#modalTrabajador').on('shown.bs.modal', function () {
       
       
-       $('#nombreTrabajador').focus();
+       $('#ciTrabajador').focus();
     });  
    
     $('#trabajadores').DataTable({

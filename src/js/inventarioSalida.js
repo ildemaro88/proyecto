@@ -4,18 +4,56 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
+//$(document).ready(function() {
+
+$('#confirm-delete').on('click', '.btn-ok', function(e) {
+                    var $modalDiv = $(e.delegateTarget);
+                    var id = $(this).data('recordId');
+                    var tipo = $(this).data('recordTipo');
+                    console.log(id+' '+tipo);
+                    $.ajax({
+                        data:'idPrestamoA='+id+'&tipo='+tipo,
+                        url: "../control/ControlPrestamo.php", 
+                        type: 'post',
+                        success: function(data) {
+                                location.reload();                           
+                        },
+                        error: function(jqXHR, textStatus, error) {
+                             alert('error: ' + jqXHR.responseText);
+                        }
+                      });
+                    
+                    
+                    $modalDiv.addClass('loading');
+                    setTimeout(function() {
+                        $modalDiv.modal('hide').removeClass('loading');
+                    }, 1000)
+                });
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        var data = $(e.relatedTarget).data();
+        //alert(data.recordTitle);
+        $('.title', this).text(data.recordTitle);
+        $('.btn-ok', this).data('recordId', data.recordId);
+        $('.btn-ok', this).data('recordTipo', data.recordTipo);
+    });
+
+   $('#solicitudes').DataTable({
+      "language": {
+            "lengthMenu": "Mostrar _MENU_ filas por página",
+            "zeroRecords": "No hay registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin registros",
+            "search":"Buscar",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)"
+      }
+    });
 
  $('.solo-numero').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '');
            $('#msalida').val($('#cantidadMaterialEntregado').val());
 
           });
-    $('#formMaterialEntregado')[0].reset();
-    $('#formHerramientaEntregada')[0].reset();
-    $('#btnRegistrarMaterialEntregado').prop('disabled', false);
-    $('#btnRegistrarHerramientaEntregada').prop('disabled', false);
-    $('#cantidadHerramientaEntregada').prop('disabled', false);
-     $('#cantidadMaterialEntregado').prop('disabled', false);
+    
 
 
 
@@ -93,12 +131,14 @@ $(document).ready(function() {
          var recurso = $('#recursoMaterial').val();
          var existente = $('#mexistente').val();
          var msalida = $('#msalida').val();
+         var idRecibe = $('#trabajadorRecibeMaterial').val();        
          var total = $('#cantidadMaterialEntregado').val();
          var tipo = "2";
+         var estatus = "7";
          if ($( "#formMaterialEntregado" ).valid()){
            
              $.ajax({
-                data: "recurso="+recurso+"&totalRecurso="+total+"&tipoTransaccion="+tipo+"&max="+existente,
+                data: "recurso="+recurso+"&totalRecurso="+total+"&tipoTransaccion="+tipo+"&recibe="+idRecibe+"&max="+existente+"&estatus="+estatus,
                 url: "../control/ControlInventario.php", 
                 type: "post",
                 success: function(result){
@@ -177,11 +217,12 @@ $(document).ready(function() {
          var existente = $('#hexistente').val();
          var total = $('#cantidadHerramientaEntregada').val();
          var tipo = "2";
+         var estatus = "7";
          
          if ($( "#formHerramientaEntregada" ).valid()){
           
         $.ajax({
-            data: "recurso="+recurso+"&totalRecurso="+total+"&tipoTransaccion="+tipo+"&recibe="+idRecibe+"&max="+existente,
+            data: "recurso="+recurso+"&totalRecurso="+total+"&tipoTransaccion="+tipo+"&recibe="+idRecibe+"&max="+existente+"&estatus="+estatus,
             url: "../control/ControlInventario.php", 
             type: "post",
             success: function(result){

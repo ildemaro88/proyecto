@@ -34,6 +34,7 @@ class Prestamo extends Modelo{
 							 t.telefono,
 							 r.nombre AS herramienta,							 
 							 p.cantidad,
+               p.estatus AS id_estatus,
 							 p.fecha_salida AS fecha,
                              p.fecha_entrada AS fechae,
 							 e.descripcion AS estatus,
@@ -43,7 +44,7 @@ class Prestamo extends Modelo{
 							INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
 							INNER JOIN recurso r on r.id_recurso = p.id_recurso
 							INNER JOIN estatus e ON e.id_estatus = p.estatus
-							WHERE p.estatus != 5
+							WHERE p.estatus != 6
                             ";      
 
         $this->get_results_from_query();  
@@ -52,12 +53,65 @@ class Prestamo extends Modelo{
        
     }   
 
+    public function getSolicitudesAprobadas(){
+        $this->query="SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS responsable,
+               t.telefono,
+               t.ci,
+               r.nombre AS recurso,              
+               p.cantidad,
+               r.id_tipo_recurso AS tipo,
+               p.estatus,
+               p.fecha_salida AS fecha,
+                             p.fecha_entrada AS fechae,
+               e.descripcion AS estatus,
+               p.id_prestamo
+
+              FROM ".$this->tabla." p
+              INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
+              INNER JOIN recurso r on r.id_recurso = p.id_recurso
+              INNER JOIN estatus e ON e.id_estatus = p.estatus
+              WHERE p.estatus = 8
+                            ";      
+
+        $this->get_results_from_query();  
+      $prestamos = $this->rows;
+      return $prestamos;   
+       
+    } 
+
+    public function getSolicitudesPendientes(){
+        $this->query="SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS responsable,
+               t.telefono,
+               t.ci,
+               r.nombre AS recurso,              
+               p.cantidad,
+               r.id_tipo_recurso AS tipo,
+               p.estatus,
+               p.fecha_salida AS fecha,
+                             p.fecha_entrada AS fechae,
+               e.descripcion AS estatus,
+               p.id_prestamo
+
+              FROM ".$this->tabla." p
+              INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
+              INNER JOIN recurso r on r.id_recurso = p.id_recurso
+              INNER JOIN estatus e ON e.id_estatus = p.estatus
+              WHERE p.estatus = 7
+                            ";      
+
+        $this->get_results_from_query();  
+      $prestamos = $this->rows;
+      return $prestamos;   
+       
+    } 
+
 
     public function buscar($idPrestamo='') {  
         $this->query="SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS responsable,
 							 t.telefono,
 							 r.nombre AS herramienta,
 							 p.id_recurso,
+               p.estatus,
 							 p.cantidad,
 							 p.fecha_salida AS fecha,
                              p.estatus id_estatus,
@@ -68,7 +122,7 @@ class Prestamo extends Modelo{
 							INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
 							INNER JOIN recurso r on r.id_recurso = p.id_recurso
 							INNER JOIN estatus e ON e.id_estatus = p.estatus 
-							WHERE p.estatus != 5 AND p.id_prestamo=".$idPrestamo."";      
+							WHERE p.estatus != 7 and p.estatus !=8 AND p.id_prestamo=".$idPrestamo."";      
 
         $this->get_results_from_query();  
 	    $prestamo = $this->rows;
@@ -130,15 +184,50 @@ class Prestamo extends Modelo{
     } 
 
     public function eliminar($idPrestamo='') {
-         $this->query= " SELECT * FROM ".$this->tabla." WHERE id_prestamo =  '".$this->ci."' "; 
+         $this->query= " SELECT * FROM ".$this->tabla." WHERE id_prestamo =  '".$idPrestamo."' "; 
          $this->execute_single_query(); 
          $cantidad = $this->rows[0]['cantidad'];
-     $this->query= " UPDATE  ".$this->tabla." set estatus=5 WHERE id_prestamo = ".$idPrestamo.""; 
+     $this->query= " UPDATE  ".$this->tabla." set estatus=6 WHERE id_prestamo = ".$idPrestamo.""; 
 
       $msg = $this->execute_single_query();  
       $this->query = "UPDATE  inventario SET total=total+".$this->cantidad." WHERE id_recurso = '".$this->idRecurso."'";
       $msg = $this->execute_single_query(); 
       echo $msg;
-    }                  
+    }        
+
+    public function entregar($idPrestamo='',$tipo) {
+         $this->query= " SELECT * FROM ".$this->tabla." WHERE id_prestamo =  '".$idPrestamo."' "; 
+         $this->execute_single_query(); 
+         $cantidad = $this->rows[0]['cantidad'];
+         $estatus= ($tipo == '1')?'4':'5';
+         
+     $this->query= " UPDATE  ".$this->tabla." set estatus=".$estatus.", fecha_salida= NOW() WHERE id_prestamo = ".$idPrestamo.""; 
+
+      $msg = $this->execute_single_query();  
+      $this->query = "UPDATE  inventario SET total=total-".$this->cantidad." WHERE id_recurso = '".$this->idRecurso."'";
+      $msg = $this->execute_single_query(); 
+      echo $msg;
+    }     
+
+
+    public function aprobar($idPrestamo='',$tipo) {
+         
+     $estatus= '8';
+         
+     $this->query= " UPDATE  ".$this->tabla." set estatus=".$estatus.", fecha_salida= NOW() WHERE id_prestamo = ".$idPrestamo.""; 
+
+      $msg = $this->execute_single_query();  
+      echo $msg;
+    }      
+
+    public function rechazar($idPrestamo='',$tipo) {
+         
+     $estatus= '9';
+         
+     $this->query= " UPDATE  ".$this->tabla." set estatus=".$estatus.", fecha_salida= NOW() WHERE id_prestamo = ".$idPrestamo.""; 
+
+      $msg = $this->execute_single_query();  
+      echo $msg;
+    }              
 }
 ?>

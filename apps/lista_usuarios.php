@@ -108,7 +108,7 @@ $roles = $roles->getAll();
                       <?php foreach ($trabajadores as $trabajador){ 
                         
                   ?>
-                        <option value="<?php echo $trabajador['id_trabajador'];?>"><?php echo $trabajador['nombre'].' '.$trabajador['apellido'];?></option>
+                        <option value="<?php echo $trabajador['id_trabajador'];?>"><?php echo $trabajador['ci'].' - '.$trabajador['nombre'].' '.$trabajador['apellido'];?></option>
 
                     <?php } }?>                    
                   </select>

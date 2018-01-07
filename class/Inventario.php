@@ -15,14 +15,16 @@ class Inventario extends Modelo{
     public $total;
     public $idRecibe;
     public $recurso;
+    public $estatus;
     
-     public function __construct($recurso = " ",$total = " ",$tipoTransaccion=" ",$idRecibe=" ", $id = " ") 
+     public function __construct($recurso = " ",$total = " ",$tipoTransaccion=" ",$idRecibe=" ", $id = " ", $estatus =" ") 
     { 
         $this->recurso          = $recurso;
         $this->total            = $total;
         $this->id               = $id;
         $this->tipoTransaccion  = $tipoTransaccion;
         $this->idRecibe         = $idRecibe;
+        $this->estatus          = $estatus;
     } 
 
     public function getAll(){
@@ -100,9 +102,10 @@ class Inventario extends Modelo{
                             ('".$this->recurso."',1,'".$this->tipoTransaccion."','".$totalRecibido."')";
                     $msg = $this->execute_single_query(); 
                 if($this->idRecibe != " "){
-                $this->query = "INSERT INTO  prestamo (id_trabajador,id_recurso,cantidad)
+                
+                $this->query = "INSERT INTO  prestamo (id_trabajador,id_recurso,cantidad,estatus)
                             VALUES 
-                            ('".$this->idRecibe."','".$this->recurso."','".$totalRecibido."')";
+                            ('".$this->idRecibe."','".$this->recurso."','".$totalRecibido."','".$this->estatus."')";
                     $msg = $this->execute_single_query(); 
                 }
                 echo $msg;
