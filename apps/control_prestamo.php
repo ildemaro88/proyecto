@@ -71,15 +71,23 @@ $prestamos = $prestamos->getAll();
                     <td><?php echo (empty($prestamo['fechae']))?' ':date("d/m/Y H:i:s",strtotime($prestamo['fechae']));?></td>
                     <?php } ?>
                     <td><?php echo $prestamo['estatus']; ?></td>
-                    <td><button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $prestamo['id_prestamo']; ?>)" id="<?php echo $prestamo['id_prestamo']; ?>"
+                    <td>
+<?php if ($prestamo['id_estatus'] == '4'){ ?>
+                       <button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $prestamo['id_prestamo']; ?>)" id="<?php echo $prestamo['id_prestamo']; ?>"
                                                                                                                             data-id="<?php echo $prestamo['id_prestamo']; ?>">
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
-                                                                                                                    </button></td>
+                                                                                                                    </button>
+                    <?php } else{ ?>
+                        N/A
+                      <?php } ?>
+                    </td>
                     <td><p data-placement="top" title="Delete">
                         <button class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $prestamo['id_prestamo']; ?>"  data-title="Delete"data-record-id="<?php echo $prestamo['id_prestamo']; ?>" data-record-title="<?php echo $prestamo['herramienta']; ?>" data-target="#confirm-delete">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                    </p></td>         
+                    </p>
+
+                    </td>         
                                 
 
                 </tr>
