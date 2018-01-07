@@ -60,7 +60,7 @@ $materiales = $material->getAll("2");
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                                                     </button></td>
                     <td>
-                    <?php if ($material['status'] == '6'){ ?>
+                    <?php if ($material['estatus'] == '6'){ ?>
                         N/A
                     <?php } else{ ?>
                     <p data-placement="top" title="Delete">
