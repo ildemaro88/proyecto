@@ -1,18 +1,12 @@
 <?php
-require_once '../class/Recurso.php';
-require_once '../class/Trabajador.php';
+require_once '../class/Prestamo.php';
+require_once '../class/Cargo.php';
 require_once 'menu.php';
 
-
-$material = new Recurso();
-$materiales = $material->getAll("2");
-
-$herramienta = new Recurso();
-$herramientas = $herramienta->getAll("1");
+$prestamos = new Prestamo();
+$solicitudes = $prestamos->getSolicitudesAprobadas();
 
 
-$trabajador = new Trabajador();
-$trabajadores = $trabajador->getAll();
 
 
 
@@ -20,7 +14,96 @@ $trabajadores = $trabajador->getAll();
 
 <body>
     <h1>Salida Inventario</h1>
-<ul class="nav nav-tabs">
+
+    <div class="container">
+      
+                 <table id="solicitudes" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Cédula</th> 
+                <th>Responsable</th> 
+                <th>Telefono</th> 
+                <th>Herramienta / Material</th>                 
+                <th>Cantidad</th>
+               <!--  <th>Fecha Asignado</th>
+                <th>Fecha Devuelto</th> -->
+                <th>Estatus</th>
+                <th>Entregar</th>
+                <!-- <th>Eliminar</th> -->
+                
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Cédula</th> 
+                <th>Responsable</th> 
+                <th>Telefono</th> 
+                <th>Herramienta / Material</th>                 
+                <th>Cantidad</th>
+                <!-- <th>Fecha Asignado</th>
+                <th>Fecha Devuelto</th> -->
+                <th>Estatus</th>
+                <th>Entregar</th>
+                <!-- <th>Eliminar</th> -->
+            </tr>
+        </tfoot>
+        <?php if(!empty($solicitudes)){ ?>
+        <tbody>
+            <?php foreach ($solicitudes as $solicitud){ 
+     
+                ?>
+                <tr>
+                    <td><?php echo $solicitud['ci']; ?></td>
+                    <td><?php echo $solicitud['responsable']; ?></td>
+                    <td><?php echo $solicitud['telefono']; ?></td>        
+                    <td><?php echo $solicitud['recurso']; ?></td>
+                    <td><?php echo $solicitud['cantidad']; ?></td>
+                    <!-- <td><?php echo date("d/m/Y H:i:s",strtotime($solicitude['fecha'])); ?></td>
+                    <td><?php echo (empty($prestamo['fechae']))?' ':date("d/m/Y H:i:s",strtotime($prestamo['fechae']));?></td> -->
+                    
+                    <td><?php echo $solicitud['estatus']; ?></td>
+                  <!--   <td><button type="button" class="btn btn-success btn-xs"  onclick="editar(<?php echo $prestamo['id_prestamo']; ?>)" id="<?php echo $prestamo['id_prestamo']; ?>"
+                                                                                                                            data-id="<?php echo $prestamo['id_prestamo']; ?>">
+                                                                                                                            <span title="Entregar" class=" glyphicon glyphicon-log-out"></span>
+                                                                                                                    </button></td> -->
+                    <td><p data-placement="top" title="Delete">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" id="<?php echo $solicitud['id_prestamo']; ?>"  data-title="Delete" data-record-id="<?php echo $solicitud['id_prestamo']; ?>" data-record-tipo="<?php echo $solicitud['tipo']; ?>" data-record-title="<?php echo 'Solicitante : '.$solicitud['responsable'].' | Recurso: '. $solicitud['recurso'].' | Cantidad : '.$solicitud['cantidad']; ?>" data-target="#confirm-delete">
+                            <span title="Entregar" class=" glyphicon glyphicon-log-out"></span>
+                        </button>
+                    </p></td>       
+                                
+
+                </tr>
+            <?php } ?>
+        </tbody>
+        <?php } ?>
+    </table>
+      
+
+    </div>
+    <div class="modal fade " id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar Salida de Recurso</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>¿Confirma la salida de la siguiente solicitud:  <b><i class="title"></i></b>?, este procedimiento es irreversible.</p>
+                    <p>¿Confirma la salida?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-success btn-ok">Confirmar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#material">Material</a></li>
   <li><a data-toggle="tab" href="#herramienta">Herramienta</a></li>
   
@@ -53,6 +136,21 @@ $trabajadores = $trabajador->getAll();
                   <em id="msgMaterial2"></em>
               </div>
               <input type="hidden"  id="mexistente" name="mexistente" value=" " />
+          </div>
+          <div class="form-group row">
+              <div class="col-md-12">
+                  <label for="trabajadorRecibe" class="control-label">Recibe</label>                                
+                  <select class="form-control" id="trabajadorRecibeMaterial" name="trabajadorRecibe">
+                      <option value="">Seleccione:</option>
+                      <?php if(!empty($trabajadores)){ ?>
+                      <?php foreach ($trabajadores as $trabajador){ 
+                        
+                  ?>
+                  <option value="<?php echo $trabajador['id_trabajador'];?>"><?php echo $trabajador['nombre'].' '.$trabajador['apellido'];?></option>
+
+                    <?php } }?>                    
+                  </select>
+              </div>
           </div>
           
           <div class="form-group row">
@@ -112,7 +210,6 @@ $trabajadores = $trabajador->getAll();
         </div>
     </form>
   </div>
-</div>                              
+</div-->                              
 </body>
-
 <script src="../src/js/inventarioSalida.js" type="text/javascript"></script>

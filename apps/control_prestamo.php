@@ -31,7 +31,7 @@ $prestamos = $prestamos->getAll();
             <tr>
                 <th>Responsable</th> 
                 <th>Telefono</th> 
-                <th>Herramienta</th>                 
+                <th>Herramienta / Material</th>                 
                 <th>Cantidad</th>
                 <th>Fecha Asignado</th>
                 <th>Fecha Devuelto</th>
@@ -45,7 +45,7 @@ $prestamos = $prestamos->getAll();
             <tr>
                 <th>Responsable</th> 
                 <th>Telefono</th> 
-                <th>Herramienta</th>                 
+                <th>Herramienta / Material</th>                 
                 <th>Cantidad</th>
                 <th>Fecha Asignado</th>
                 <th>Fecha Devuelto</th>
@@ -65,8 +65,11 @@ $prestamos = $prestamos->getAll();
                     <td><?php echo $prestamo['herramienta']; ?></td>
                     <td><?php echo $prestamo['cantidad']; ?></td>
                     <td><?php echo date("d/m/Y H:i:s",strtotime($prestamo['fecha'])); ?></td>
+                    <?php if($prestamo['id_estatus'] == '5'){ ?>
+                    <td>N/A</td>
+                    <?php }else{ ?>
                     <td><?php echo (empty($prestamo['fechae']))?' ':date("d/m/Y H:i:s",strtotime($prestamo['fechae']));?></td>
-                    
+                    <?php } ?>
                     <td><?php echo $prestamo['estatus']; ?></td>
                     <td><button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $prestamo['id_prestamo']; ?>)" id="<?php echo $prestamo['id_prestamo']; ?>"
                                                                                                                             data-id="<?php echo $prestamo['id_prestamo']; ?>">
@@ -121,7 +124,7 @@ $prestamos = $prestamos->getAll();
                     </div>
                                
                     <div class="col-md-6">
-                        <label for="herramienta" class="control-label">Herramienta</label>
+                        <label for="herramienta" class="control-label">Herramienta / Material</label>
                         <input type="hidden" name="idHerramienta" id="idHerramienta"/>
                          <input type="text" readonly="readonly" placeholder="fechaSalida" class="form-control " id="herramienta" name="herramienta"/>
                     </div>

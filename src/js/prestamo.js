@@ -210,7 +210,7 @@ function editar(id){
         
         },
        error: function(data) {
-            alert(data);
+            alert("No puede editar los solicitudes de Material");
        
 
         

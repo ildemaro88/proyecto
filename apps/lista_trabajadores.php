@@ -97,6 +97,12 @@ $cargos = $cargos->getAll();
                 <div >
                  <em id="msg"></em>
                 </div>
+                <div class="form-group row">                
+                    <div class="col-md-12">
+                        <label for="ciTrabajador" class="control-label">C&eacute;dula del Trabajador</label>
+                         <input type="text" placeholder="C&eacute;dula del Trabajador" class="form-control solo-numero" id="ciTrabajador" name="ciTrabajador"/>
+                    </div>
+                </div> 
                 <div class="form-group row">
                  
                     <div class="col-md-12">
@@ -111,12 +117,7 @@ $cargos = $cargos->getAll();
                          <input type="text" placeholder="Apellido del Trabajador" class="form-control" id="apellidoTrabajador" name="apellidoTrabajador"/>
                     </div>
                 </div> 
-                 <div class="form-group row">                
-                    <div class="col-md-12">
-                        <label for="ciTrabajador" class="control-label">C&eacute;dula del Trabajador</label>
-                         <input type="text" placeholder="C&eacute;dula del Trabajador" class="form-control solo-numero" id="ciTrabajador" name="ciTrabajador"/>
-                    </div>
-                </div> 
+                 
                 <div class="form-group row">
                     <div class="col-md-12">
                         <label for="cargoTrabajador" class="control-label">Cargo Del Trabajador</label>
