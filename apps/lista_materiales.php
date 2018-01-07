@@ -53,7 +53,7 @@ $materiales = $material->getAll("2");
                 <tr>
                     <td><?php echo $material['codigo']; ?></td>        
                     <td><?php echo $material['nombre']; ?></td>
-                    <td><?php echo ($material['estatus']==1)? "ACTIVO": "INACTIVO"; ?></td>
+                    <td><?php echo $material['status']; ?></td>
                     
                        <td><button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $material['id_recurso']; ?>)" id="<?php echo $material['id_recurso']; ?>"
                                                                                                                             data-id="<?php echo $material['id_recurso']; ?>">

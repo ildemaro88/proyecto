@@ -46,7 +46,7 @@ $herramientas = $herramienta->getAll('1');
                 <tr>
                     <td><?php echo $herramienta['codigo']; ?></td>        
                     <td><?php echo $herramienta['nombre']; ?></td>
-                    <td><?php echo ($herramienta['estatus']==1)? "ACTIVO": "INACTIVO"; ?></td>
+                    <td><?php echo $herramienta['status']; ?></td>
                     <td><button type="button" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $herramienta['id_recurso']; ?>)" id="<?php echo $herramienta['id_recurso']; ?>"
                                                                                                                             data-id="<?php echo $herramienta['id_recurso']; ?>">
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
