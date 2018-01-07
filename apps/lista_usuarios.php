@@ -69,7 +69,7 @@ $roles = $roles->getAll();
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                                                     </button></td>
                     <td>
-                    <?php if ($trabajador['status'] == '6'){ ?>
+                    <?php if ($usuario['uestatus'] == '6'){ ?>
                         N/A
                     <?php } else{ ?>
                     <p data-placement="top" title="Delete">
