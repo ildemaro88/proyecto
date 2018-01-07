@@ -68,11 +68,17 @@ $roles = $roles->getAll();
                                                                                                                             data-id="<?php echo $usuario['id_usuario']; ?>">
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                                                     </button></td>
-                    <td><p data-placement="top" title="Delete">
+                    <td>
+                    <?php if ($trabajador['status'] == '6'){ ?>
+                        N/A
+                    <?php } else{ ?>
+                    <p data-placement="top" title="Delete">
                         <button class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $usuario['id_usuario']; ?>"  data-title="Delete"data-record-id="<?php echo $usuario['id_usuario']; ?>" data-record-title="<?php echo $usuario['nombre']; ?>" data-target="#confirm-delete">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                    </p></td>					
+                    </p>
+                    <?php } ?>
+                    </td>					
                                 
 
                 </tr>

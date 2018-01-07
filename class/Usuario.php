@@ -39,6 +39,7 @@ class Usuario extends Modelo{
                             r.descripcion as rol,
                             e.descripcion as estatus,
                             u.correo,
+                            u.estatus as status,
                             u.id_usuario
 
                          From ".$this->tabla." u
