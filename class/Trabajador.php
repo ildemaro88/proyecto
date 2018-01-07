@@ -129,10 +129,11 @@ class Trabajador extends Modelo{
     public function getAll($plus =" "){
         if($plus != " "){
         $this->query="SELECT * From ".$this->tabla." 
-                        WHERE id_trabajador not in (Select id_trabajador from usuario) and estatus != 6";         
+                        WHERE id_trabajador not in (Select id_trabajador from usuario) #and estatus != 6";         
         }else{
-        $this->query="SELECT * From ".$this->tabla." 
-                        INNER JOIN cargo on cargo.id_cargo = ".$this->tabla.".id_cargo WHERE estatus != 6";
+        $this->query="SELECT ".$this->tabla.".*, e.descripcion as status, cargo.descripcion as cargo From ".$this->tabla." 
+                        INNER JOIN estatus e on e.id_estatus = ".$this->tabla.".estatus
+                        INNER JOIN cargo on cargo.id_cargo = ".$this->tabla.".id_cargo #WHERE estatus != 6";
         
         }
 

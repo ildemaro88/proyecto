@@ -36,6 +36,7 @@ $cargos = $cargos->getAll();
                 <th>Apellido</th>                 
                 <th>Cargo</th>
                 <th>Tel&eacute;fono</th>
+                <th>Estatus</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
                 
@@ -48,6 +49,7 @@ $cargos = $cargos->getAll();
                 <th>Apellido</th>                
                 <th>Cargo</th>
                 <th>Tel&eacute;fono</th>
+                <th>Estatus</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -61,8 +63,9 @@ $cargos = $cargos->getAll();
                     <td><?php echo $trabajador['ci']; ?></td>
                     <td><?php echo $trabajador['nombre']; ?></td>        
                     <td><?php echo $trabajador['apellido']; ?></td>
-                    <td><?php echo $trabajador['descripcion']; ?></td>
+                    <td><?php echo $trabajador['cargo']; ?></td>
                      <td><?php echo $trabajador['telefono']; ?></td>
+                     <td><?php echo $trabajador['status']; ?></td>
                     <td><button type="button" class="btn btn-primary btn-xs"	onclick="editar(<?php echo $trabajador['id_trabajador']; ?>)" id="<?php echo $trabajador['id_trabajador']; ?>"
                                                                                                                             data-id="<?php echo $trabajador['id_trabajador']; ?>">
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
