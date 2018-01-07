@@ -555,7 +555,7 @@ class Usuario extends Modelo{
     }
 
     public function eliminar($idUsuario='') {
-      $this->query= " DELETE FROM ".$this->tabla." WHERE id_usuario = '$idUsuario'"; 
+      $this->query= " UPDATE ".$this->tabla."  set estatus=6 WHERE id_usuario = '$idUsuario'"; 
       $msg = $this->execute_single_query();  
 
       echo $msg;

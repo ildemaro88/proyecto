@@ -44,7 +44,7 @@ class Prestamo extends Modelo{
 							INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
 							INNER JOIN recurso r on r.id_recurso = p.id_recurso
 							INNER JOIN estatus e ON e.id_estatus = p.estatus
-							WHERE p.estatus != 6
+							#WHERE p.estatus != 6
                             ";      
 
         $this->get_results_from_query();  
