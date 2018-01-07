@@ -28,14 +28,14 @@ class Recurso extends Modelo{
     public function getAll($idTipo=" "){
         if($idTipo != " "){
 
-            $this->query="SELECT * From ".$this->tabla." WHERE id_tipo_recurso = $idTipo and estatus != 6 ";
+            $this->query="SELECT * From ".$this->tabla." WHERE id_tipo_recurso = $idTipo #and estatus != 6 ";
             $this->get_results_from_query();  
         
             $herramientas = $this->rows;
             return $herramientas;
 
         }else{
-            $this->query="SELECT * From ".$this->tabla." and estatus != 6 ";
+            $this->query="SELECT * From ".$this->tabla." and #estatus != 6 ";
             $this->get_results_from_query();  
         
             $herramientas = $this->rows;
