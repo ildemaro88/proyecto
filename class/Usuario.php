@@ -67,7 +67,7 @@ class Usuario extends Modelo{
 
     public function guardar() {  
         
-        if(!empty($this->id)){//Modificar
+        if($this->id != " "){//Modificar
               $this->query = "UPDATE  ".$this->tabla." SET clave='".$this->clave."' ,correo='".$this->correo."' WHERE id_usuario = '".$this->id."'";
             
           
@@ -78,7 +78,7 @@ class Usuario extends Modelo{
 
            $this->query= " SELECT * FROM ".$this->tabla." WHERE id_trabajador = '".$this->idTrabajador."' "; 
             $this->get_results_from_query(); 
-
+            //var_dump($this->rows);exit();
             if(count($this->rows)==0) { 
                 $this->query = "INSERT INTO ".$this->tabla." (id_trabajador,id_rol,usuario,clave,correo,estatus)
                     VALUES

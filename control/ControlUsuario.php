@@ -8,7 +8,7 @@ $sql=" ";
 
 
 if(!empty($nombreUsuario) and !empty($clave)){
-
+   // var_dump($_POST);
     $Usuario = new Usuario($nombreUsuario,$clave,$idTrabajador,$rol,$correo,$estatus);
     return $Usuario->guardar();
     
