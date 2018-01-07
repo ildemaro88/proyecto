@@ -51,11 +51,17 @@ $herramientas = $herramienta->getAll('1');
                                                                                                                             data-id="<?php echo $herramienta['id_recurso']; ?>">
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                                                     </button></td>
-                    <td><p data-placement="top" title="Delete">
+                    <td>
+                    <?php if ($herramienta['status'] == '6'){ ?>
+                        N/A
+                    <?php } else{ ?>
+                    <p data-placement="top" title="Delete">
                         <button class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $herramienta['id_recurso']; ?>"  data-title="Delete"data-record-id="<?php echo $herramienta['id_recurso']; ?>" data-record-title="<?php echo $herramienta['nombre']; ?>" data-target="#confirm-delete">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                    </p></td>       	
+                    </p>
+                    <?php } ?>
+                    </td>       	
 
                 </tr>
             <?php } ?>
