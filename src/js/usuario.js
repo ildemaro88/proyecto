@@ -111,7 +111,7 @@ $(document).ready(function() {
                if(result != "0"){  
                   $("#msg").css({'color':'green'})                   
                   $("#msg").html(result);
-                  location.reload();
+                 // location.reload();
                 }
                 else{
                   $("#msg").css({'color':'red'})
