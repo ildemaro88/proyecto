@@ -35,14 +35,16 @@ $(document).ready(function() {
             },
             {
                 extend: 'excelHtml5',
+                title: '<Sistema de Gestión e Inventario - Trabajadores',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: [ 0, 1, 2, 3, 4, 5 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
+                title: 'Sistema de Gestión e Inventario - Trabajadores',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 5 ]
+                    columns: [ 0, 1, 2, 3, 4, 5 ]
                 }
             },
             'colvis'
@@ -57,7 +59,13 @@ $(document).ready(function() {
                 },
                 colvis: 'Ocultar Columnas',
                 copy: 'Copiar Filas'
-            }
+            },
+             "lengthMenu": "Mostrar _MENU_ filas por página",
+            "zeroRecords": "No hay registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin registros",
+            "search":"Buscar",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)"
         }
     } );
     
