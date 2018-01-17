@@ -195,7 +195,7 @@ class Recurso extends Modelo{
     public function pie(){
          $this->query= " SELECT r.nombre as  nombre_recurso, r.id_recurso, p.cantidad as cantidad  FROM prestamo p 
                          INNER JOIN recurso r ON r.id_recurso = p.id_recurso
-                         WHERE p.estatus = 4 GROUP BY r.id_recurso"; 
+                         WHERE p.estatus = 4 "; 
             
      // var_dump($this->query);
       $this->get_results_from_query();  
