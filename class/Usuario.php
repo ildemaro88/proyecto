@@ -73,6 +73,15 @@ class Usuario extends Modelo{
             
           
         $msg = $this->execute_single_query(); 
+
+        if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Actualiza Usuario id: ".$this->id."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
         echo $msg;
 
         }else{
@@ -86,6 +95,15 @@ class Usuario extends Modelo{
                 ('".$this->idTrabajador."','".$this->idRol."','".$this->usuario."', '".md5($this->clave)."', '".$this->correo."','".$this->estatus."' )";
                
                 $msg = $this->execute_single_query(); 
+
+                if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Registra nuevo Usuario id: ".$this->lastID."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
                 echo $msg;
                  
             }else{ 
@@ -554,6 +572,15 @@ class Usuario extends Modelo{
       
         $this->query = "UPDATE  ".$this->tabla." SET id_rol='".$this->idRol."' ,correo='".$this->correo."',estatus='".$this->estatus."' WHERE id_usuario = '".$this->id."'";     
         $msg = $this->execute_single_query(); 
+
+        if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Actualiza Usuario id: ".$this->id."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
         echo $msg;
 
     }
@@ -561,6 +588,15 @@ class Usuario extends Modelo{
     public function eliminar($idUsuario='') {
       $this->query= " UPDATE ".$this->tabla."  set estatus=6 WHERE id_usuario = '$idUsuario'"; 
       $msg = $this->execute_single_query();  
+
+       if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Elimina Usuario id: ".$this->id."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
 
       echo $msg;
     } 

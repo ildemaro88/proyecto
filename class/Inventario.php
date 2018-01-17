@@ -97,16 +97,41 @@ class Inventario extends Modelo{
                       total='".$this->total."'
                 ";                     
                 $msg = $this->execute_single_query(); 
+                
                 $this->query = "INSERT INTO  transaccion_recurso (id_recurso,id_usuario,id_tipo_transaccion,cantidad)
                             VALUES 
                             ('".$this->recurso."',1,'".$this->tipoTransaccion."','".$totalRecibido."')";
                     $msg = $this->execute_single_query(); 
+                    if($msg == "Operación exitosa"){
+                        if($this->tipoTransaccion == "1"){
+                                $tipo = "entrada";
+                        }else{
+                            $tipo = "salida";
+                        }
+                        if($this->idRecibe == " "){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                        
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Registra ".$tipo." de Recurso id: ".$this->recurso." en el inventario')
+                    ";     
+                    
+                    $this->execute_single_query(); }
+                    }
                 if($this->idRecibe != " "){
                 
                 $this->query = "INSERT INTO  prestamo (id_trabajador,id_recurso,cantidad,estatus)
                             VALUES 
                             ('".$this->idRecibe."','".$this->recurso."','".$totalRecibido."','".$this->estatus."')";
                     $msg = $this->execute_single_query(); 
+                    if($msg == "Operación exitosa"){
+                       
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Registra solicitud de Recurso id: ".$this->recurso." en el inventario')
+                    ";     
+                $this->execute_single_query(); 
+                    }
+                    
                 }
                 echo $msg;
 

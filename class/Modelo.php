@@ -60,7 +60,7 @@ protected function execute_single_query() {
         $this->lastID= $this->_db->insert_id;
 
     } else {
-        $msg = "Error: " . $sql . "<br>" . $this->_db->error;
+        $msg = "Error: " .$this->query . "<br>" . $this->_db->error;
     }
      
     $this->close_connection();  

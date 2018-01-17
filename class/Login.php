@@ -49,7 +49,13 @@ class Login extends Modelo {
     $_SESSION["rol"] = $login[0]['id_rol'];
     $_SESSION["correo"] = $login[0]['correo'];
 
-
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Ha iniciado Sessión')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    
     session_write_close();
     }
     header('location: apps/inicio.php');
@@ -57,6 +63,12 @@ class Login extends Modelo {
     }
 
     public function logout(){
+        $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Ha Cerrado Sessión')
+                    ";     
+                    
+                    $this->execute_single_query(); 
         if(isset($_SESSION['usuario'])){
         unset($_SESSION['usuario']);
     }
@@ -111,6 +123,7 @@ class Login extends Modelo {
 
        $this->query= " SELECT * FROM trabajador WHERE id_trabajador = ".$usuario[0]['id_trabajador'].""; 
             $this->get_results_from_query();  
+            
        
             $trabajador = $this->rows;
 

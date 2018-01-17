@@ -61,7 +61,11 @@ $materiales = $material->getAll("2");
                                                                                                                     </button></td>
                     <td>
                     <?php if ($material['estatus'] == '6'){ ?>
-                        N/A
+                         <p data-placement="top" title="Delete">
+                        <button disabled="disabled" class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $material['id_recurso']; ?>"  data-title="Delete"data-record-id="<?php echo $material['id_recurso']; ?>" data-record-title="<?php echo $material['nombre']; ?>" data-target="#confirm-delete">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </p>
                     <?php } else{ ?>
                     <p data-placement="top" title="Delete">
                         <button class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $material['id_recurso']; ?>"  data-title="Delete"data-record-id="<?php echo $material['id_recurso']; ?>" data-record-title="<?php echo $material['nombre']; ?>" data-target="#confirm-delete">

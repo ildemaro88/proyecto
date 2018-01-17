@@ -129,12 +129,14 @@ class Recurso extends Modelo{
              //var_dump($this->query);
         $msg = $this->execute_single_query(); 
 
-         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+          if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    ('".$_SESSION['idUsuario']."','".$this->nombre."','".$this->estatus."','".$this->codigo."')
+                    (".$_SESSION['idUsuario'].",'Actualiza  el Recurso id: ".$this->id."')
                     ";     
-
-                $this->execute_single_query(); 
+                    
+                    $this->execute_single_query(); 
+                    }
         echo $msg;
                  }else{
                     echo "n";
@@ -156,7 +158,16 @@ class Recurso extends Modelo{
                     ('".$this->idTipo."','".$this->nombre."','".$this->estatus."','".$this->codigo."')
                     ";     
                          //var_dump($this->query);
+                    
                     $msg = $this->execute_single_query(); 
+                    if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Crea  el Recurso id: ".$this->lastID."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
                     echo $msg;
                  }else{
                     echo "n";
@@ -181,6 +192,15 @@ class Recurso extends Modelo{
             
      // var_dump($this->query);
       $msg = $this->execute_single_query();  
+
+       if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Elimina  el Recurso id: ".$idRecurso."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
        /*     }else{
                 echo "0";
             }*/

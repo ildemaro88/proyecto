@@ -161,6 +161,15 @@ class Trabajador extends Modelo{
              $this->query = "UPDATE  ".$this->tabla." SET nombre='".$this->nombre."',apellido='".$this->apellido."',ci='".$this->ci."',id_cargo='".$this->cargo."',telefono = '".$this->telefono."',direccion ='".$this->direccion."' WHERE id_trabajador = '".$this->id."'";
              
         $msg = $this->execute_single_query(); 
+
+        if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Actualiza trabajador id: ".$this->id."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
         echo $msg;
 
         }else{
@@ -174,6 +183,15 @@ class Trabajador extends Modelo{
                 ('".$this->nombre."','".$this->apellido."',$this->ci,   '".$this->cargo."', '".$this->telefono."', '".$this->direccion."' )";
                 
                 $msg = $this->execute_single_query(); 
+
+                if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Registra nuevo trabajador id: ".$this->lastID."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
                 echo $msg;
                  
             }else{ 
@@ -192,6 +210,15 @@ class Trabajador extends Modelo{
     public function eliminar($idTrabajador='') {
       $this->query= " UPDATE  ".$this->tabla." set estatus = 6 WHERE id_trabajador = ".$idTrabajador.""; 
       $msg = $this->execute_single_query();  
+
+       if($msg == "Operación exitosa"){
+                         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    (".$_SESSION['idUsuario'].",'Elimina trabajador id: ".$idTrabajador."')
+                    ";     
+                    
+                    $this->execute_single_query(); 
+                    }
 
       echo $msg;
     } 

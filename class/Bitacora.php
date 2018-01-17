@@ -3,19 +3,17 @@ require_once "Modelo.php";
 
 
 /**
- * Description of Prestamo
+ * Description of Bitacora
  *
  * @author Arkam
  */
-class Prestamo extends Modelo{
-    public $tabla = "prestamo";
+class Bitacora extends Modelo{
+    public $tabla = "bitacora";
     public $id;
     public $idTrabajador;
     public $idRecurso;
     public $cantidad;
-    public $fechaSalida;
-    public $fechaEntrada;
-    public $estatus;
+   
     
     public function __construct($idTrabajador=" ", $idRecurso=" ", $cantidad=" ", $fechaSalida=" ",$estatus=" ",$id=" ", $fechaEntrada=" "){
     	$this->idTrabajador = $idTrabajador;
@@ -30,26 +28,22 @@ class Prestamo extends Modelo{
 
 
     public function getAll(){
-        $this->query="SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS responsable,
-							 t.telefono,
-							 r.nombre AS herramienta,							 
-							 p.cantidad,
-               p.estatus AS id_estatus,
-							 p.fecha_salida AS fecha,
-                             p.fecha_entrada AS fechae,
-							 e.descripcion AS estatus,
-							 p.id_prestamo
+        $this->query="SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS trabajador,
+               t.telefono,
+               u.usuario as nombre_usuario,
+               b.accion,
+               b.created_at as fecha
+               
 
-							FROM ".$this->tabla." p
-							INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
-							INNER JOIN recurso r on r.id_recurso = p.id_recurso
-							INNER JOIN estatus e ON e.id_estatus = p.estatus
-							#WHERE p.estatus != 6
+              FROM bitacora b
+              INNER JOIN usuario u on b.id_usuario = u.id_usuario
+              INNER JOIN trabajador t on u.id_trabajador = t.id_trabajador
+              ORDER BY b.created_at DESC
                             ";      
 
         $this->get_results_from_query();  
-	    $prestamos = $this->rows;
-	    return $prestamos;   
+	    $bitacoras = $this->rows;
+	    return $bitacoras;   
        
     }   
 

@@ -70,6 +70,7 @@ and open the template in the editor.
             <li><a href="lista_trabajadores.php">Trabajadores</a></li> 
             <li><a href="lista_usuarios.php">Usuarios</a></li> 
             <li><a href="../bd/backup.php">Respaldar Data</a></li> 
+            <li><a href="bitacora.php">Bitácora</a></li>
           </ul>
           <?php }else{ ?>
             <ul class="nav navbar-nav " >

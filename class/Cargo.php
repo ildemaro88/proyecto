@@ -68,7 +68,7 @@ class Cargo extends Modelo{
 
     public function editar($user_data=array()) {  
         foreach ($user_data as $campo=>$valor):  
-            $$campo = $valor;
+            $campo = $valor;
         endforeach;  
         $this->query= " UPDATE usuariosSET nombre='$nombre',apellido='$apellido',clave='$clave'WHERE email = '$email'"; 
         $this->execute_single_query();  
