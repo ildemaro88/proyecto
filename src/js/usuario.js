@@ -111,11 +111,11 @@ $(document).ready(function() {
                if(result != "0"){  
                   $("#msg").css({'color':'green'})                   
                   $("#msg").html(result);
-                  //location.reload();
+                  location.reload();
                 }
                 else{
                   $("#msg").css({'color':'red'})
-                   $("#msg").html("Ya existe un usuario registrado con la C.I.: "+ ci +" .Por favor verifique e intente nuevamente.");
+                   $("#msg").html("Ya existe un usuario registrado para este trabajador .Por favor verifique e intente nuevamente.");
                 }
                 },
        error: function(data) {
