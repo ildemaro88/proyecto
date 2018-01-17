@@ -25,7 +25,7 @@ class PDF extends FPDF
     //Movernos a la derecha
     $this->Cell(60);
     //Título
-    $this->Cell(60,10,'Reporte Materiales',0,0,'C');
+    $this->Cell(60,10,'Reporte Trabajadores',0,0,'C');
     //Salto de línea
     $this->Ln(30);
       
@@ -84,7 +84,7 @@ if ($a%2==0){
  $pdf->Cell(25,6,utf8_decode($trabajador['ci']),1,0,'L',1);
  $pdf->Cell(35,6,utf8_decode($trabajador['nombre']),1,0,'L',1);
  $pdf->Cell(35,6,utf8_decode($trabajador['apellido']),1,0,'L',1);
- $pdf->Cell(50,6,utf8_decode($trabajador['descripcion']),1,0,'L',1);
+ $pdf->Cell(50,6,utf8_decode($trabajador['cargo']),1,0,'L',1);
  $pdf->Cell(35,6,$trabajador['telefono'],1,0,'L',1);
  $pdf->Ln(6);
  $pdf->SetFillColor(255);
