@@ -21,14 +21,14 @@ $cargos = $cargos->getAll();
                 <button class="btn btn-primary" id="btnNuevo"> Nuevo</button>
             </div>
             <div>
-             <div class="pull-right col-md-2 ">
+             <!--div class="pull-right col-md-2 ">
                 <a href="../reportes/reporteTrabajadores.php" class="btn btn-warning" id="btnExportar"> Exportar</a>
-            </div>
+            </div-->
 
             </div>
             <br/><br/><br/>
         <div class="container">
-            <table id="trabajadores" class="display" cellspacing="0" width="100%">
+            <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>C&eacute;dula</th> 
