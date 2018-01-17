@@ -128,6 +128,13 @@ class Recurso extends Modelo{
                     $this->query = "UPDATE  ".$this->tabla." SET nombre='".$this->nombre."',codigo='".$this->codigo."',estatus='".$this->estatus."' WHERE id_recurso = '".$this->id."'";
              //var_dump($this->query);
         $msg = $this->execute_single_query(); 
+
+         $this->query = "INSERT INTO bitacora (id_usuario,accion)
+                    VALUES
+                    ('".$_SESSION['idUsuario']."','".$this->nombre."','".$this->estatus."','".$this->codigo."')
+                    ";     
+
+                $this->execute_single_query(); 
         echo $msg;
                  }else{
                     echo "n";
@@ -188,7 +195,7 @@ class Recurso extends Modelo{
     public function pie(){
          $this->query= " SELECT r.nombre as  nombre_recurso, p.cantidad as cantidad  FROM prestamo p 
                          INNER JOIN recurso r ON r.id_recurso = p.id_recurso
-                         WHERE p.estatus = 4"; 
+                         WHERE p.estatus = 4 GROUP BY r.nombre"; 
             
      // var_dump($this->query);
       $this->get_results_from_query();  
