@@ -23,6 +23,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.min.css">
         <link href="../src/dataTable/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <link href="../src/dataTable/media/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="../src/css/estiloss.css" rel="stylesheet" type="text/css">
         <link href="../src/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
         <script src="../src/jquery/jquery.js" type="text/javascript"></script>
@@ -30,8 +31,18 @@ and open the template in the editor.
          <script src="../src/js/md5.js" type="text/javascript"></script>
         <script src="../src/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../src/dataTable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/dataTables.buttons.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/buttons.bootstrap.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/jszip.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/pdfmake.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/vfs_fonts.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/buttons.html5.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/buttons.print.min.js" type="text/javascript"></script>
+        <script src="../src/dataTable/media/js/buttons.colVis.min.js" type="text/javascript"></script>
         <script src="../src/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
         <script src="../src/js/app.js" type="text/javascript"></script>
+
+        
         
     </head>
    <nav class="navbar navbar-inverse">

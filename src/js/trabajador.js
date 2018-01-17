@@ -24,17 +24,42 @@ $(document).ready(function() {
       
        $('#ciTrabajador').focus();
     });  
-   
-    $('#trabajadores').DataTable({
-    	"language": {
-            "lengthMenu": "Mostrar _MENU_ filas por página",
-            "zeroRecords": "No hay registros",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "Sin registros",
-            "search":"Buscar",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)"
-      }
-    });
+      $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 5 ]
+                }
+            },
+            'colvis'
+        ],
+        language: {
+            buttons: {
+                copyTitle: 'Copiar al portapapeles',
+                copyKeys: 'Appuyez sur <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> pour copier les données du tableau à votre presse-papiers. <br><br>Pour annuler, cliquez sur ce message ou appuyez sur Echap.',
+                copySuccess: {
+                    _: '%d filas copiadas',
+                    1: '1 fila copiada'
+                },
+                colvis: 'Ocultar Columnas',
+                copy: 'Copiar Filas'
+            }
+        }
+    } );
     
     $('#btnNuevo').click(function(){
         $("label.error").remove();
