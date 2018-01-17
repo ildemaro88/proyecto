@@ -185,5 +185,28 @@ class Recurso extends Modelo{
 
     }
 
+    public function pie(){
+         $this->query= " SELECT r.nombre as  nombre_recurso, p.cantidad as cantidad  FROM prestamo p 
+                         INNER JOIN recurso r ON r.id_recurso = p.id_recurso
+                         WHERE p.estatus = 4"; 
+            
+     // var_dump($this->query);
+      $this->get_results_from_query();  
+       
+        $recursos = json_encode($this->rows);
+
+       /*     }else{
+                echo "0";
+            }*/
+            //Seteamos el header de "content-type" como "JSON" para que jQuery lo reconozca como tal
+        
+        //Guardamos los datos en un array
+       
+        //Devolvemos el array pasado a JSON como objeto
+        echo $recursos;
+      
+
+    }
+
 
 }

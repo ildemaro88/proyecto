@@ -34,3 +34,9 @@ if(!empty($idRecursoE)){
     $RecursoEliminar = new Recurso();
     return $RecursoEliminar->eliminar($idRecursoE);
 }
+
+if(!empty($pie)){
+	//var_dump($pie);exit();
+	$RecursoPie = new Recurso();
+	return $RecursoPie->pie();
+}

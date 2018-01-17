@@ -72,7 +72,11 @@ $cargos = $cargos->getAll();
                                                                                                                     </button></td>
                     <td>
                     <?php if ($trabajador['estatus'] == '6'){ ?>
-                        N/A
+                        <p data-placement="top" title="Delete">
+                        <button disabled="disabled" class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $trabajador['id_trabajador']; ?>"  data-title="Delete"data-record-id="<?php echo $trabajador['id_trabajador']; ?>" data-record-title="<?php echo $trabajador['nombre']; ?>" data-target="#confirm-delete">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </p>
                     <?php } else{ ?>
                     <p data-placement="top" title="Delete">
                         <button class="btn btn-danger btn-xs" data-toggle="modal" id="<?php echo $trabajador['id_trabajador']; ?>"  data-title="Delete"data-record-id="<?php echo $trabajador['id_trabajador']; ?>" data-record-title="<?php echo $trabajador['nombre']; ?>" data-target="#confirm-delete">

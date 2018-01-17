@@ -19,9 +19,9 @@ $prestamos = $prestamos->getAll();
                 <button class="btn btn-primary hidden" id="btnNuevo"> Nuevo</button>
             </div>
             <div>
-             <div class="pull-right col-md-1 ">
+             <!--div class="pull-right col-md-1 ">
                 <a href=<?php echo (count($prestamos)>0)?"../reportes/reportePrestamo.php":"#";?> class="btn btn-warning" id="btnExportar"> Exportar</a>
-            </div>
+            </div-->
 
             </div>
             <br/><br/><br/>
@@ -78,7 +78,10 @@ $prestamos = $prestamos->getAll();
                                                                                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                                                                                     </button>
                     <?php } else{ ?>
-                        N/A
+                       <button type="button" disabled="disabled" class="btn btn-primary btn-xs"  onclick="editar(<?php echo $prestamo['id_prestamo']; ?>)" id="<?php echo $prestamo['id_prestamo']; ?>"
+                                                                                                                            data-id="<?php echo $prestamo['id_prestamo']; ?>">
+                                                                                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                                                                                    </button>
                       <?php } ?>
                     </td>
                     <td><p data-placement="top" title="Delete">

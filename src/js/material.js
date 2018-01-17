@@ -4,16 +4,52 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-		    $('#materiales').DataTable({
-		    	"language": {
-		            "lengthMenu": "Mostrar _MENU_ filas por página",
-		            "zeroRecords": "No hay registros",
-		            "info": "Mostrando página _PAGE_ de _PAGES_",
-		            "infoEmpty": "Sin registros",
-		            "search":"Buscar",
-		            "infoFiltered": "(filtrado de _MAX_ registros totales)"
-      }
-    });
+		    
+
+        $('#materiales').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                title: '<Sistema de Gestión e Inventario - Materiales',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Sistema de Gestión e Inventario - Materiales',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        language: {
+            buttons: {
+                copyTitle: 'Copiar al portapapeles',
+                copyKeys: 'Appuyez sur <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> pour copier les données du tableau à votre presse-papiers. <br><br>Pour annuler, cliquez sur ce message ou appuyez sur Echap.',
+                copySuccess: {
+                    _: '%d filas copiadas',
+                    1: '1 fila copiada'
+                },
+                colvis: 'Ocultar Columnas',
+                copy: 'Copiar Filas'
+            },
+             "lengthMenu": "Mostrar _MENU_ filas por página",
+            "zeroRecords": "No hay registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin registros",
+            "search":"Buscar",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)"
+        }
+    } );
     
         $.validator.setDefaults( {
         submitHandler: function () {

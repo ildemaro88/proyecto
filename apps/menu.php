@@ -41,6 +41,7 @@ and open the template in the editor.
         <script src="../src/dataTable/media/js/buttons.colVis.min.js" type="text/javascript"></script>
         <script src="../src/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
         <script src="../src/js/app.js" type="text/javascript"></script>
+        <script src="../src/chart/Chart.min.js" type="text/javascript"></script>
 
         
         
