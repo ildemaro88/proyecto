@@ -28,6 +28,7 @@ $(document).ready(function() {
    
     $('#bitacora').DataTable( {
         dom: 'Bfrtip',
+        "order": [[ 4, 'desc' ]],
         buttons: [
             {
                 extend: 'copyHtml5',
