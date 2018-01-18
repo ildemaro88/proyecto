@@ -11,7 +11,7 @@ $bitacoras = $bitacoras->getAll();
 ?>
 
 <body>
-    <h1>Prestamos</h1>
+    <h1>Bitácora</h1>
    <br/>
     
         <div class="container">
