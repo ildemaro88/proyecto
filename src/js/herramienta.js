@@ -171,7 +171,7 @@ $(document).ready(function() {
                  if(result != "0" && result != "n"){         
                     $("#msg").css({'color':'green'})          
                     $("#msg").html(result);
-                    location.reload();
+                   // location.reload();
                   }
                   else{
                       if(result == "0"){

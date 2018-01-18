@@ -13,9 +13,9 @@ $recursos = $recurso->getAll();
      <br/>
     
         <div class="container">
-            <div class="pull-right">
+            <!--div class="pull-right">
                  <a href="../reportes/reporteMaterial.php" class="btn btn-primary" id="btnExportar"> Exportar</a>
-            </div>
+            </div-->
             <div>
            
             <br/><br/><br/>

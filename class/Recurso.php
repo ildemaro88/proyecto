@@ -130,9 +130,14 @@ class Recurso extends Modelo{
         $msg = $this->execute_single_query(); 
 
           if($msg == "Operación exitosa"){
+
+                     $this->query = "SELECT * FROM ".$this->tabla." WHERE id_recurso ='".$this->id."'   ";     
+                    
+                    $this->get_results_from_query();
+
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Actualiza  el Recurso id: ".$this->id."')
+                    (".$_SESSION['idUsuario'].",'Actualiza  el Recurso : ".$this->rows[0]["nombre"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -159,11 +164,16 @@ class Recurso extends Modelo{
                     ";     
                          //var_dump($this->query);
                     
+                    
                     $msg = $this->execute_single_query(); 
+
+                    $this->query = "SELECT * FROM ".$this->tabla." WHERE id_recurso ='".$this->lastID."'   ";     
+                    
+                    $this->get_results_from_query();
                     if($msg == "Operación exitosa"){
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Crea  el Recurso id: ".$this->lastID."')
+                    (".$_SESSION['idUsuario'].",'Crea  el Recurso : ".$this->rows[0]["nombre"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -193,10 +203,14 @@ class Recurso extends Modelo{
      // var_dump($this->query);
       $msg = $this->execute_single_query();  
 
+      $this->query = "SELECT * FROM ".$this->tabla." WHERE id_recurso ='".$idRecurso."'   ";     
+                    
+                    $this->get_results_from_query();
+
        if($msg == "Operación exitosa"){
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Elimina  el Recurso id: ".$idRecurso."')
+                    (".$_SESSION['idUsuario'].",'Elimina  el Recurso : ".$this->rows[0]["nombre"]."')
                     ";     
                     
                     $this->execute_single_query(); 
