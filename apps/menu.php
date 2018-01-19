@@ -74,7 +74,7 @@ and open the template in the editor.
           </ul>
           <?php }else{ ?>
             <ul class="nav navbar-nav " >
-            <li class=""><a href="inicio.php">Incio</a></li>
+            <li class=""><a href="inicio.php">Inicio</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="">Inventario
               <span class="caret"></span></a>

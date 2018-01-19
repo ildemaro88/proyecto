@@ -75,9 +75,12 @@ class Usuario extends Modelo{
         $msg = $this->execute_single_query(); 
 
         if($msg == "Operación exitosa"){
+			$this->query = "SELECT * FROM ".$this->tabla." WHERE id_usuario ='".$this->id."'   ";     
+                    
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Actualiza Usuario id: ".$this->id."')
+                    (".$_SESSION['idUsuario'].",'Actualiza Usuario : ".$this->rows[0]["usuario"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -89,17 +92,21 @@ class Usuario extends Modelo{
            $this->query= " SELECT * FROM ".$this->tabla." WHERE id_trabajador = '".$this->idTrabajador."' "; 
             $this->get_results_from_query(); 
             //var_dump($this->rows);exit();
-            if(count($this->rows)==0) { 
+            if(empty($this->rows)) { 
                 $this->query = "INSERT INTO ".$this->tabla." (id_trabajador,id_rol,usuario,clave,correo,estatus)
                     VALUES
-                ('".$this->idTrabajador."','".$this->idRol."','".$this->usuario."', '".md5($this->clave)."', '".$this->correo."','".$this->estatus."' )";
+                ('".$this->idTrabajador."','".$this->idRol."','".$this->usuario."', '".md5($this->clave)."', '".$this->correo."','".$this->estatus."' )
+				RETURNING id_usuario";
                
                 $msg = $this->execute_single_query(); 
 
                 if($msg == "Operación exitosa"){
+					$this->query = "SELECT * FROM ".$this->tabla." WHERE id_usuario ='".$this->lastID."'   ";     
+                    
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Registra nuevo Usuario id: ".$this->lastID."')
+                    (".$_SESSION['idUsuario'].",'Registra nuevo Usuario : ".$this->rows[0]["usuario"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -574,12 +581,16 @@ class Usuario extends Modelo{
         $msg = $this->execute_single_query(); 
 
         if($msg == "Operación exitosa"){
+                        $this->query = "SELECT * FROM ".$this->tabla." WHERE id_usuario ='".$this->id."'   ";     
+                    
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Actualiza Usuario id: ".$this->id."')
+                    (".$_SESSION['idUsuario'].",'Actualiza Usuario : ".$this->rows[0]["usuario"]."')
                     ";     
                     
                     $this->execute_single_query(); 
+                     
                     }
         echo $msg;
 
@@ -590,9 +601,12 @@ class Usuario extends Modelo{
       $msg = $this->execute_single_query();  
 
        if($msg == "Operación exitosa"){
+		   $this->query = "SELECT * FROM ".$this->tabla." WHERE id_recurso ='".$this->id."'   ";     
+                    
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Elimina Usuario id: ".$this->id."')
+                    (".$_SESSION['idUsuario'].",'Elimina Usuario : ".$this->rows[0]["nombre"]."')
                     ";     
                     
                     $this->execute_single_query(); 

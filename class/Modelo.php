@@ -36,31 +36,30 @@ abstract class Modelo {
 
     # Conectar a la base de datos
  private function open_connection() {  
-    $this->_db= new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-     //$this->_db = pg_connect(DB_HOST, 5432,DB_NAME,DB_USER,DB_PASS) or die ("Error de conexion. ". pg_last_error());
+   
+	$conn_string = "host=".DB_HOST." port=".PORT." dbname=".DB_NAME." user=".DB_USER." password=".DB_PASS." options='--client_encoding=UTF8'";
 
-     if ( $this->_db->connect_errno ) 
-        { 
-            echo "Fallo al conectar a MySQL: ". $this->_db->connect_error; 
-            return;     
-        }
-
-        $this->_db->set_charset(DB_CHARSET);  
+	
+	$this->_db = pg_connect($conn_string)or die('No se ha podido conectar: ' . pg_last_error());
+	
 
  } 
 # Desconectar la base de datos
  private function close_connection() {  
-    $this->_db->close();  
+    pg_close($this->_db);  
 } 
 # Ejecutar un query simple del tipo INSERT, DELETE, UPDATE 
 protected function execute_single_query() { 
     $this->open_connection();  
-    if ($this->_db->query($this->query) === TRUE) {
+	$result = pg_query($this->_db,$this->query);
+	
+    if ($result == TRUE) {
         $msg = "Operación exitosa";
-        $this->lastID= $this->_db->insert_id;
+		$row = pg_fetch_row($result); 
+        $this->lastID= $row['0'];
 
     } else {
-        $msg = "Error: " .$this->query . "<br>" . $this->_db->error;
+        $msg = "Error: " .$this->query . "<br>" . pg_last_error();
     }
      
     $this->close_connection();  
@@ -70,22 +69,22 @@ protected function execute_single_query() {
 # Traer resultados de una consulta en un Array 
 protected function get_results_from_query() {  
     $this->open_connection();  
-    //$result = $this->_db->query($this->query);  
-    if (!$result = $this->_db->query($this->query)) {
+      
+    if (!$result = pg_query($this->_db,$this->query)) {
         // ¡Oh, no! La consulta falló. 
         echo "Lo sentimos, este sitio web está experimentando problemas.";
 
         // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
         // cómo obtener información del error
         echo "Error: La ejecución de la consulta falló debido a: \n";
-        echo "Query: " . $sql . "\n";
+        echo "Query: " . $this->query . "\n";
         echo "Errno: " . $this->_db->errno . "\n";
         echo "Error: " . $this->_db->error . "\n";
         exit;
     }
 
-    $this->rows= $result->fetch_all(MYSQLI_ASSOC);
-    $result->close();  
+    $this->rows= pg_fetch_all($result);
+    pg_free_result($result);  
     $this->close_connection();
 
 }

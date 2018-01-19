@@ -44,7 +44,7 @@ class Prestamo extends Modelo{
 							INNER JOIN trabajador t on t.id_trabajador = p.id_trabajador
 							INNER JOIN recurso r on r.id_recurso = p.id_recurso
 							INNER JOIN estatus e ON e.id_estatus = p.estatus
-							#WHERE p.estatus != 6
+							
                             ";      
 
         $this->get_results_from_query();  
@@ -176,10 +176,11 @@ class Prestamo extends Modelo{
            $this->query= " SELECT * FROM ".$this->tabla." WHERE ci = '".$this->ci."' "; 
             $this->get_results_from_query(); 
 
-            if(count($this->rows)==0) { 
+            if(empty($this->rows)) { 
                 $this->query = "INSERT INTO ".$this->tabla." (nombre,apellido,ci,id_cargo,telefono,direccion)
                     VALUES
-                ('".$this->nombre."','".$this->apellido."',$this->ci,   '".$this->cargo."', '".$this->telefono."', '".$this->direccion."' )";
+                ('".$this->nombre."','".$this->apellido."',$this->ci,   '".$this->cargo."', '".$this->telefono."', '".$this->direccion."' )
+				RETURNING id_prestamo";
                 
                 $msg = $this->execute_single_query(); 
                 if($msg == "Operación exitosa"){

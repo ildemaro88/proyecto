@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 
 <?php 
 require_once 'class/Login.php';
@@ -37,7 +37,7 @@ if(!empty($usuario)&& !empty($clave)){
 	<div class="col-md-offset-4 col-md-4  col-xs-offset-4 col-xs-6">
             <form action="index.php" method="post" id="formIndex" class="formInicio">    
                 <div class="">
-                    <h2>Bienvenido</h2>
+                    <h2>Bienvenido a Recom</h2>
                 </div> 
                 <div class="form-group">
                     <div class="">

@@ -129,11 +129,11 @@ class Trabajador extends Modelo{
     public function getAll($plus =" "){
         if($plus != " "){
         $this->query="SELECT * From ".$this->tabla." 
-                        WHERE id_trabajador not in (Select id_trabajador from usuario) #and estatus != 6";         
+                        WHERE id_trabajador not in (Select id_trabajador from usuario) ";         
         }else{
         $this->query="SELECT ".$this->tabla.".*, e.descripcion as status, cargo.descripcion as cargo From ".$this->tabla." 
                         INNER JOIN estatus e on e.id_estatus = ".$this->tabla.".estatus
-                        INNER JOIN cargo on cargo.id_cargo = ".$this->tabla.".id_cargo #WHERE estatus != 6";
+                        INNER JOIN cargo on cargo.id_cargo = ".$this->tabla.".id_cargo ";
         
         }
 
@@ -163,9 +163,14 @@ class Trabajador extends Modelo{
         $msg = $this->execute_single_query(); 
 
         if($msg == "Operación exitosa"){
+			 $this->query = "SELECT CONCAT_WS(' ',t.nombre,t.apellido) AS trabajador
+					FROM ".$this->tabla." t WHERE id_trabajador ='".$this->id."'   ";     
+                         
+                    $this->get_results_from_query();
+					
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Actualiza trabajador id: ".$this->id."')
+                    (".$_SESSION['idUsuario'].",'Actualiza trabajador : ".$this->rows[0]["trabajador"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -177,17 +182,22 @@ class Trabajador extends Modelo{
            $this->query= " SELECT * FROM ".$this->tabla." WHERE ci = '".$this->ci."' "; 
             $this->get_results_from_query(); 
 
-            if(count($this->rows)==0) { 
+            if(empty($this->rows)) { 
                 $this->query = "INSERT INTO ".$this->tabla." (nombre,apellido,ci,id_cargo,telefono,direccion)
                     VALUES
-                ('".$this->nombre."','".$this->apellido."',$this->ci,   '".$this->cargo."', '".$this->telefono."', '".$this->direccion."' )";
+                ('".$this->nombre."','".$this->apellido."',$this->ci,   '".$this->cargo."', '".$this->telefono."', '".$this->direccion."' )
+				RETURNING id_trabajador";
                 
                 $msg = $this->execute_single_query(); 
 
                 if($msg == "Operación exitosa"){
+					 $this->query = "SELECT 	CONCAT_WS(' ',t.nombre,t.apellido) AS trabajador
+					FROM ".$this->tabla." t WHERE id_trabajador ='".$this->lastID."'   ";     
+                         
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Registra nuevo trabajador id: ".$this->lastID."')
+                    (".$_SESSION['idUsuario'].",'Registra nuevo trabajador : ".$this->rows[0]["trabajador"]."')
                     ";     
                     
                     $this->execute_single_query(); 
@@ -212,9 +222,13 @@ class Trabajador extends Modelo{
       $msg = $this->execute_single_query();  
 
        if($msg == "Operación exitosa"){
+		   $this->query = "SELECT 	CONCAT_WS(' ',t.nombre,t.apellido) AS trabajador
+					FROM ".$this->tabla." t WHERE id_trabajador ='".$idTrabajador."'   ";     
+                         
+                    $this->get_results_from_query();
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Elimina trabajador id: ".$idTrabajador."')
+                    (".$_SESSION['idUsuario'].",'Elimina trabajador : ".$this->rows[0]["trabajador"]."')
                     ";     
                     
                     $this->execute_single_query(); 

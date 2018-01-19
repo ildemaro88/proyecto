@@ -30,14 +30,14 @@ class Recurso extends Modelo{
 
             $this->query="SELECT r.*, e.descripcion status From ".$this->tabla." as r
             INNER JOIN estatus e on e.id_estatus = r.estatus
-            WHERE id_tipo_recurso = $idTipo #and estatus != 6 ";
+            WHERE id_tipo_recurso = $idTipo  ";
             $this->get_results_from_query();  
         
             $herramientas = $this->rows;
             return $herramientas;
 
         }else{
-            $this->query="SELECT * From ".$this->tabla." and #estatus != 6 ";
+            $this->query="SELECT * From ".$this->tabla."  ";
             $this->get_results_from_query();  
         
             $herramientas = $this->rows;
@@ -124,7 +124,7 @@ class Recurso extends Modelo{
             $this->query= " SELECT * FROM ".$this->tabla." WHERE codigo = '".$this->codigo."' and estatus != 6 "; 
                 $this->get_results_from_query(); 
 
-                if(count($this->rows)==0) { 
+                if(empty($this->rows)) { 
                     $this->query = "UPDATE  ".$this->tabla." SET nombre='".$this->nombre."',codigo='".$this->codigo."',estatus='".$this->estatus."' WHERE id_recurso = '".$this->id."'";
              //var_dump($this->query);
         $msg = $this->execute_single_query(); 
@@ -153,15 +153,15 @@ class Recurso extends Modelo{
             $this->query= " SELECT * FROM ".$this->tabla." WHERE nombre = '".$this->nombre."' and estatus != 6 "; 
             $this->get_results_from_query(); 
 
-            if(count($this->rows)==0) { 
+            if(empty($this->rows)) { 
                 $this->query= " SELECT * FROM ".$this->tabla." WHERE codigo = '".$this->codigo."' and estatus != 6 "; 
                 $this->get_results_from_query(); 
 
-                if(count($this->rows)==0) { 
+                if(empty($this->rows)) { 
                     $this->query = "INSERT INTO ".$this->tabla." (id_tipo_recurso,nombre,estatus,codigo)
                     VALUES
                     ('".$this->idTipo."','".$this->nombre."','".$this->estatus."','".$this->codigo."')
-                    ";     
+                    RETURNING id_recurso";     
                          //var_dump($this->query);
                     
                     
@@ -197,7 +197,7 @@ class Recurso extends Modelo{
         /*$this->query="SELECT * FROM prestamo where id_recurso='$idRecurso' and cantidad >= 1";
         $this->get_results_from_query(); 
 
-            if(count($this->rows)==0) { */
+            if(empty($this->rows)) { */
       $this->query= " UPDATE  ".$this->tabla." set estatus = 6 WHERE id_recurso = '$idRecurso'"; 
             
      // var_dump($this->query);

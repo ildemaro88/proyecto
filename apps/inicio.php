@@ -11,7 +11,7 @@ require_once 'menu.php';
                 <?php }?>
 
 
-<div class="col-md-offset-5"><h4>RECURSOS PRESTADOS</h4></div>
+<div class="col-md-offset-5"><h4>HERRAMIENTAS ASIGNADAS</h4></div>
 <hr>
   <canvas id="oilChart" width="600" height="200"></canvas>
 

@@ -23,10 +23,11 @@ class Login extends Modelo {
     public function validarLogin($usuario,$clave){                
         
        $this->query="SELECT * From usuario where usuario='".$usuario."' and clave = '".md5($clave)."' and usuario.estatus = 1";
-       
+       var_dump($this->query);//exit();
        $this->get_results_from_query();
        $login = $this->rows;
-         
+         var_dump($login);//exit();
+		 var_dump(count($login));
     // ¡Uf, lo conseguimos!. Sabemos que nuestra conexión a MySQL y nuestra consulta
     // tuvieron éxito, pero ¿tenemos un resultado?
     if (count($login)=== 0) {
@@ -48,12 +49,13 @@ class Login extends Modelo {
     $_SESSION["idUsuario"] = $login[0]['id_usuario'];
     $_SESSION["rol"] = $login[0]['id_rol'];
     $_SESSION["correo"] = $login[0]['correo'];
+	$id_usuario = $_SESSION['idUsuario'];
 
                          $this->query = "INSERT INTO bitacora (id_usuario,accion)
                     VALUES
-                    (".$_SESSION['idUsuario'].",'Ha iniciado Sessión')
+                    (".$_SESSION['idUsuario'].",'Ha iniciado Session')
                     ";     
-                    
+                    var_dump($this->query);
                     $this->execute_single_query(); 
                     
     session_write_close();

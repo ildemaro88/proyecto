@@ -55,7 +55,10 @@ class Inventario extends Modelo{
                 $this->query= " SELECT * FROM ".$this->tabla." WHERE id_recurso = $idRecurso "; 
                 $this->get_results_from_query();
             }else{
-                $this->query= " SELECT IFNULL(i.total,0) as total,
+                $this->query= " SELECT 
+								CASE WHEN i.total= NULL  THEN '0' 
+								ELSE i.total
+								END AS total,
                                        r.nombre as nombre
                                 FROM recurso r
                                 LEFT JOIN ".$this->tabla." i on r.id_recurso = i.id_recurso
@@ -92,8 +95,7 @@ class Inventario extends Modelo{
                 $this->query = "INSERT INTO ".$this->tabla." (id_recurso,total)
                 VALUES
                 ('".$this->recurso."','".$this->total."')
-                ON DUPLICATE KEY 
-                      UPDATE
+                ON CONFLICT (id_recurso) DO UPDATE SET
                       total='".$this->total."'
                 ";                     
                 $msg = $this->execute_single_query(); 
